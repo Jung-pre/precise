@@ -1,0 +1,12 @@
+import Head from "next/head"
+
+return (
+  <>
+    <Head>
+      <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    </Head>
+    <div className="min-h-screen bg-gray-50 relative overflow-hidden" style={language === 'ko' ? { wordBreak: 'keep-all' } : {}}>
+      {/* ... existing code ... */}
+    </div>
+  </>
+) 
