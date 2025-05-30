@@ -384,32 +384,32 @@ export default function Component() {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-gray-50/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 sm:py-3 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-[2px] group relative select-none" style={{ minHeight: 32 }}>
-            <Image src="/img/logo.png" alt="PRECISE Logo" width={28} height={28} className="w-7 h-7 object-contain transition-transform duration-300 group-hover:scale-105" priority />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-[0.4rem] flex justify-between items-center">
+          <Link href="/" className="flex items-center gap-2 group relative select-none" style={{ minHeight: 32 }}>
+            <Image src="/img/logo.png" alt="PRECISE Logo" width={48} height={48} className="w-7 sm:w-8 md:w-12 h-auto object-contain transition-transform duration-300 group-hover:scale-105" priority />
             <div className="flex flex-col leading-tight justify-center relative h-full">
               {/* PRECISE 텍스트 outline */}
-              <span className="text-sm sm:text-base font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-300 select-none block relative">
+              <span className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-300 select-none block relative">
                 PRECISE
               </span>
               {/* PRECISE 텍스트 fill - 아래에서 위로 채워짐 */}
               <span
-                className="text-sm sm:text-base font-bold tracking-tight text-black block absolute left-0 top-0 w-full h-full overflow-hidden select-none pointer-events-none"
+                className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-black block absolute left-0 top-0 w-full h-full overflow-hidden select-none pointer-events-none"
                 style={{
                   clipPath: `inset(${100 - Math.min(scrollProgress * 2, 100)}% 0 0 0)`
                 }}
               >
                 PRECISE
               </span>
-              <span className="text-[7px] font-medium text-gray-400 tracking-widest mt-[-2px]">AI AGENCY</span>
+              <span className="text-[7px] sm:text-[9px] md:text-xs font-medium text-gray-400 tracking-widest mt-[-2px]">AI AGENCY</span>
             </div>
           </Link>
-          <div className="flex gap-[0.4rem] items-center">
+          <div className="flex gap-[0.4rem] sm:gap-2 md:gap-4 items-center">
             {content[language].nav.map((item, index) => (
               <Link
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-[11px] sm:text-xs font-medium hover:opacity-70 transition-all duration-300 transform hover:translate-y-[-2px]"
+                className="text-[11px] sm:text-xs md:text-sm font-medium hover:opacity-70 transition-all duration-300 transform hover:translate-y-[-2px]"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {item}
@@ -422,7 +422,7 @@ export default function Component() {
                   className="ml-0 p-1 rounded-full border border-gray-300 bg-white hover:bg-gray-100 transition-colors flex items-center justify-center"
                   aria-label="Change language"
                 >
-                  <Globe className="w-4 h-4" />
+                  <Globe className="w-4 h-4 sm:w-[1.4em] sm:h-[1.4em]" />
                 </button>
               </PopoverTrigger>
               <PopoverContent align="end" sideOffset={8} className="w-28 p-2 flex flex-col gap-1">

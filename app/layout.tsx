@@ -11,7 +11,29 @@ export const metadata: Metadata = {
   icons: [
     { rel: 'icon', url: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
     { rel: 'shortcut icon', url: '/favicon-96x96.png', type: 'image/png' }
-  ]
+  ],
+  openGraph: {
+    title: 'PRECISE - AI AGENCY',
+    description: 'AI 기반 효율과 정확함을 제공하는 디지털 에이전시 PRECISE.',
+    url: 'https://precise.kr',
+    siteName: 'PRECISE',
+    images: [
+      {
+        url: 'http://precise.kr/img_og.png',
+        width: 1200,
+        height: 630,
+        alt: 'PRECISE 로고와 슬로건',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PRECISE - AI AGENCY',
+    description: 'AI 기반 효율과 정확함을 제공하는 디지털 에이전시 PRECISE.',
+    images: ['http://precise.kr/img_og.png'],
+  },
 }
 
 export default function RootLayout({
