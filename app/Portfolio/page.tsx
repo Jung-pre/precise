@@ -17,7 +17,6 @@ export default function Component() {
   const [visibleElements, setVisibleElements] = useState(new Set())
   const [scrollProgress, setScrollProgress] = useState(0)
   const [scrollY, setScrollY] = useState(0)
-  const [language, setLanguage] = useState<'en' | 'ko'>('en')
   const [showLangSuggest, setShowLangSuggest] = useState(false)
   const langSuggestShown = useRef(false)
   const [isMouseDown, setIsMouseDown] = useState(false)
@@ -26,42 +25,53 @@ export default function Component() {
   const dialogCloseRef = useRef<HTMLButtonElement>(null)
   const [popoverOpen, setPopoverOpen] = useState(false)
 
+  const getInitialLang = () => {
+    if (typeof window !== 'undefined') {
+      if (window.location.hash === '#ko') return 'ko';
+      if (window.location.hash === '#en') return 'en';
+    }
+    return 'en';
+  };
+  const [language, setLanguage] = useState(getInitialLang);
+
   const content = {
     en: {
       nav: ["WORKS", "ABOUT", "CONTACT"],
       hero: {
-        description: "A creative studio delivering digital experiences with unmatched precision and efficiency. We believe in the power of simplicity, accuracy, and effective results.",
-        button: "Let's Work Together"
+        description: "A web publisher who values motion and workflow efficiency. My name is JUNG-SH Seonghwa. I am passionate about 3D and AI, and I focus on delivering fast, accurate, and impressive results.",
+        button: "Contact"
       },
       ai: {
-        title: "AI-Powered Precision & Efficiency",
-        desc: "We leverage cutting-edge artificial intelligence to maximize precision and efficiency in every project, accelerating our creative process and delivering exceptional results.",
+        title: "Motion, 3D & AI-Driven Publishing",
+        desc: "I focus on efficient workflows and creative solutions, blending motion, 3D, and AI to create impressive web experiences. My goal is to deliver fast, accurate, and beautiful work that stands out.",
         features: [
-          { title: "Rapid Prototyping", desc: "AI-assisted design iterations for efficient and precise results", icon: <Bot className="mx-auto" size={36} /> },
-          { title: "Smart Automation", desc: "Intelligent workflows that maximize efficiency and accuracy", icon: <BrainCircuit className="mx-auto" size={36} /> },
-          { title: "Data-Driven Insights", desc: "AI analytics that inform design decisions with precision", icon: <Sparkles className="mx-auto" size={36} /> }
+          { title: "Creative Motion", desc: "Smooth, engaging motion and animation for modern web experiences.", icon: <Bot className="mx-auto" size={36} /> },
+          { title: "3D & Interactive", desc: "Exploring 3D graphics and interactive elements for next-level engagement.", icon: <BrainCircuit className="mx-auto" size={36} /> },
+          { title: "AI-Enhanced Workflow", desc: "Leveraging AI to boost productivity and deliver smarter, faster results.", icon: <Sparkles className="mx-auto" size={36} /> }
         ],
-        ctaTitle: "Where Precision Meets Efficiency",
-        ctaDesc: "Our AI-enhanced workflow delivers projects 3x faster with unmatched accuracy and efficiency. Experience the future of creative production.",
-        ctaTags: ["Precision", "Efficiency", "Faster Delivery", "Enhanced Quality", "Cost Effective"]
+        ctaTitle: "Fast, Accurate, Impressive Results",
+        ctaDesc: "I combine speed, precision, and creativity to help brands and teams achieve outstanding digital outcomes.",
+        ctaTags: ["Motion", "3D", "AI", "Efficiency", "Creativity"]
       },
       works: {
         title: "Selected Works",
-        desc: "A curated collection of our recent projects, each crafted with precision and efficiency."
+        desc: "A showcase of projects where motion, 3D, and AI-driven efficiency made a difference."
       },
       about: {
-        title: "About PRECISE",
+        title: "About Jung Sunghwa",
         desc: [
-          "We are a creative studio that believes in the power of precision and efficiency. Every pixel, every interaction, every moment is crafted for accurate and effective digital experiences.",
-          "Our approach combines strategic thinking with beautiful execution, ensuring that every project not only looks stunning but also achieves its goals with maximum efficiency.",
-          "Founded in 2020, we've worked with startups and established brands across various industries, always maintaining our commitment to precision, efficiency, and excellence."
+          "I am a web publisher who values motion, workflow efficiency, and creativity.",
+          "I have built my expertise as a leader and project owner at major agencies such as D.FY and Hivelab, and for 4 years, I successfully led team building as a team leader at H9.",
+          "With extensive experience leading numerous projects for various brands and agencies, I always strive to keep my promises and deliver fast, accurate, and inspiring results.",
+          "I am passionate about experimenting with 3D and AI to create visually impressive web projects, and I believe in the power of collaboration and responsibility.",
+          "Currently, I am working on many projects using front-end technologies and AI. I will continue to grow and strive to become a trustworthy developer."
         ],
         stats: [
-          { number: "10+", label: "Projects" },
-          { number: "3+", label: "Clients" },
-          { number: "1", label: "Years" }
+          { number: "100+", label: "Projects" },
+          { number: "50+", label: "Clients" },
+          { number: "14", label: "Years" }
         ],
-        studio: "Our Studio",
+        studio: "Workspace",
         location: "Seoul, South Korea"
       },
       services: {
@@ -70,11 +80,11 @@ export default function Component() {
       },
       contact: {
         title: "Let's Work Together",
-        desc: "Ready to create something precise and efficient?",
+        desc: "Looking for a publisher who values motion, 3D, AI, and efficiency? Get in touch!",
         info: [
           { icon: "Mail", title: "Email", info: "tpdla2002@gmail.com" },
           { icon: "Phone", title: "Phone", info: "010-5578-6187" },
-          { icon: "MapPin", title: "Location", info: "Seoul Forest, Seongdong-gu, Seoul" }
+          { icon: "MapPin", title: "Location", info: "Seoul, South Korea" }
         ],
         button: "Start a Project",
         dialog: {
@@ -87,45 +97,47 @@ export default function Component() {
         }
       },
       footer: {
-        copyright: "© 2025 PRECISE AI AGENCY. All rights reserved.",
-        socials: ["Instagram", "Behance", "LinkedIn"]
+        copyright: "© 2025 JUNG-SH Seonghwa. All rights reserved.",
+        socials: ["Instagram", "GitHub", "LinkedIn"]
       }
     },
     ko: {
       nav: ["작업물", "소개", "문의"],
       hero: {
-        description: "정확함과 효율을 바탕으로 최고의 디지털 경험을 만드는 크리에이티브 스튜디오입니다. 단순함, 정밀함, 효율적인 결과를 추구합니다.",
-        button: "함께 일하기"
+        description: "모션과 업무 효율을 중시하는 웹 퍼블리셔 정성화입니다. 3D와 AI에 관심이 많고, 빠르고 정확하며 멋진 결과물을 만드는 데 집중합니다.",
+        button: "문의하기"
       },
       ai: {
-        title: "AI 기반 정밀함과 효율",
-        desc: "최첨단 인공지능을 활용해 모든 프로젝트에 정밀함과 효율을 극대화합니다. 창의적 프로세스를 가속화하고, 탁월한 결과를 빠르게 제공합니다.",
+        title: "모션, 3D, AI 기반 퍼블리싱",
+        desc: "업무 효율과 창의적 솔루션을 중시하며, 모션·3D·AI를 접목해 인상적인 웹 경험을 만듭니다. 빠르고 정확하며 멋진 결과물을 추구합니다.",
         features: [
-          { title: "빠른 프로토타이핑", desc: "AI가 지원하는 디자인 반복으로 효율적이고 정밀한 결과 제공", icon: <Bot className="mx-auto" size={36} /> },
-          { title: "스마트 자동화", desc: "정확함과 효율을 극대화하는 지능형 워크플로우", icon: <BrainCircuit className="mx-auto" size={36} /> },
-          { title: "데이터 기반 인사이트", desc: "정확한 디자인 결정을 위한 AI 분석", icon: <Sparkles className="mx-auto" size={36} /> }
+          { title: "크리에이티브 모션", desc: "현대적인 웹을 위한 부드럽고 매력적인 모션과 애니메이션.", icon: <Bot className="mx-auto" size={36} /> },
+          { title: "3D & 인터랙티브", desc: "3D 그래픽과 인터랙션으로 한 단계 높은 몰입감 제공.", icon: <BrainCircuit className="mx-auto" size={36} /> },
+          { title: "AI 기반 워크플로우", desc: "AI를 활용해 더 빠르고 스마트하게 결과물을 완성.", icon: <Sparkles className="mx-auto" size={36} /> }
         ],
-        ctaTitle: "정확함과 효율의 만남",
-        ctaDesc: "AI 기반 워크플로우로 3배 빠르고, 정밀함과 효율을 모두 갖춘 결과를 경험하세요.",
-        ctaTags: ["정확함", "효율", "더 빠른 납기", "향상된 품질", "비용 효율"]
+        ctaTitle: "빠르고 정확하며 멋진 결과",
+        ctaDesc: "속도, 정확성, 창의성을 모두 갖춘 결과로 브랜드와 팀의 성공을 돕습니다.",
+        ctaTags: ["모션", "3D", "AI", "효율", "크리에이티브"]
       },
       works: {
         title: "주요 작업물",
-        desc: "정확함과 효율을 담아 완성한 최근 프로젝트를 소개합니다."
+        desc: "모션, 3D, AI 기반 효율로 완성한 프로젝트 모음입니다."
       },
       about: {
-        title: "PRECISE 소개",
+        title: "일하는 개발자 정성화 소개",
         desc: [
-          "우리는 정밀함과 효율의 가치를 믿는 크리에이티브 스튜디오입니다. 모든 픽셀, 모든 상호작용, 모든 순간을 정확하고 효과적으로 만듭니다.",
-          "전략적 사고와 아름다운 실행을 결합해, 모든 프로젝트가 멋질 뿐 아니라 목표도 효율적으로 달성하도록 만듭니다.",
-          "2025년 설립 이후 다양한 업계의 스타트업과 브랜드와 함께하며, 항상 정밀함, 효율, 탁월함을 추구해왔습니다."
+          "저는 모션과 업무 효율, 그리고 크리에이티브를 중시하는 웹 퍼블리셔입니다.",
+          "디파이, 하이브랩 등 메이저 에이전시에서 리더와 책임자로 역량을 쌓았고, 에이치나인(H9)에서 4년간 팀장으로 팀빌딩을 성공적으로 이끌었습니다.",
+          "다양한 브랜드와 에이전시에서 수많은 프로젝트를 리딩하며, 약속을 지키고 빠르고 정확하며 영감을 주는 결과물을 만들어왔습니다.",
+          "3D와 AI 등 새로운 기술을 실험하며, 협업과 책임의 가치를 믿고 있습니다.",
+          "현재는 프론트 기술과 AI를 가지고, 많은 프로젝트들을 해 나가고 있습니다. 앞으로도 발전하고, 믿음이 가는 개발자가 되려합니다."
         ],
         stats: [
-          { number: "10+", label: "프로젝트" },
-          { number: "3+", label: "클라이언트" },
-          { number: "1", label: "연차" }
+          { number: "100+", label: "프로젝트" },
+          { number: "50+", label: "클라이언트" },
+          { number: "14", label: "연차" }
         ],
-        studio: "스튜디오",
+        studio: "작업 공간",
         location: "서울, 대한민국"
       },
       services: {
@@ -134,11 +146,11 @@ export default function Component() {
       },
       contact: {
         title: "함께 일해요",
-        desc: "정확하고 효율적인 결과를 만들 준비가 되셨나요?",
+        desc: "모션, 3D, AI, 효율을 중시하는 퍼블리셔를 찾고 계신가요? 언제든 문의해 주세요!",
         info: [
           { icon: "Mail", title: "이메일", info: "tpdla2002@gmail.com" },
           { icon: "Phone", title: "전화번호", info: "010-5578-6187" },
-          { icon: "MapPin", title: "위치", info: "서울숲, 서울 성동구" }
+          { icon: "MapPin", title: "위치", info: "서울, 대한민국" }
         ],
         button: "프로젝트 문의",
         dialog: {
@@ -151,8 +163,8 @@ export default function Component() {
         }
       },
       footer: {
-        copyright: "© 2025 PRECISE AI AGENCY. All rights reserved.",
-        socials: ["Instagram", "Behance", "LinkedIn"]
+        copyright: "© 2025 JUNG-SH_SH. All rights reserved.",
+        socials: ["Instagram", "GitHub", "LinkedIn"]
       }
     }
   }
@@ -224,6 +236,15 @@ export default function Component() {
     }
   }, [])
 
+  useEffect(() => {
+    function handleHashLang() {
+      if (window.location.hash === '#ko') setLanguage('ko');
+      else if (window.location.hash === '#en') setLanguage('en');
+    }
+    window.addEventListener('hashchange', handleHashLang);
+    return () => window.removeEventListener('hashchange', handleHashLang);
+  }, []);
+
   const projects = language === 'ko'
     ? [
         {
@@ -233,6 +254,7 @@ export default function Component() {
           description: "3D와 WebXR을 활용한 메타버스 게임 제작 중. 차세대 웹 기반 게임을 개발하고 있습니다.",
           image: "/img/img_meta.png",
           color: "bg-orange-50",
+          ratio: "100% 참여"
         },
         {
           title: "삼성 닷컴 UI/UX 개선",
@@ -241,7 +263,8 @@ export default function Component() {
           description: "삼성닷컴의 UI/UX개선을 위한 프로젝트. 사용자 경험을 개선하고 디자인을 최적화하여 더 나은 사용자 경험을 제공합니다.",
           image: "/img/img_work_ss.png",
           color: "bg-purple-50",
-          link: "https://www.samsung.com/uk/"
+          link: "https://www.samsung.com/uk/",
+          ratio: "100% 참여"
         },
         {
           title: "PRECISE 웹사이트",
@@ -250,6 +273,7 @@ export default function Component() {
           description: "AI로 디자인하고 개발한 크리에이티브 스튜디오 웹사이트. AI의 도움으로 제작된 미래지향적인 웹 개발의 새로운 가능성을 보여줍니다.",
           image: "/img/img_presice.png",
           color: "bg-green-50",
+          ratio: "100% 참여"
         },        
         {
           title: "한화 드림 플러스",
@@ -258,7 +282,8 @@ export default function Component() {
           description: "한화 드림플러스의 사이트 전면 개편. 홈페이지 전면 개편을 통해 더 나은 경험을 제공합니다.",
           image: "/img/img_work_hh.png",
           color: "bg-purple-50",
-          link: "https://dreamplus.asia/about/"
+          link: "https://dreamplus.asia/about/",
+          ratio: "30% 참여"
         },
         {
           title: "롯데정밀화학 60주년 기념관",
@@ -267,7 +292,8 @@ export default function Component() {
           description: "롯데정밀화학의 60년 역사를 한눈에 볼 수 있는 디지털 히스토리/아카이브 웹사이트. 브랜드의 혁신과 도전, 지속가능한 미래 비전을 스토리텔링으로 구현.",
           image: "/img/img_lotte.png",
           color: "bg-green-50",
-          link: "https://www.lottefinechem.com/lottefinechemhistory/"
+          link: "https://www.lottefinechem.com/lottefinechemhistory/",
+          ratio: "100% 참여"
         },
         {
           title: "현대 자동차 캐스퍼 Mo 개선작업",
@@ -276,7 +302,8 @@ export default function Component() {
           description: "현대 자동차 캐스퍼 Mo 개선작업. 사용자 경험을 개선하고 디자인을 최적화하여 더 나은 사용자 경험을 제공합니다.",
           image: "/img/img_work_hy.png",
           color: "bg-blue-50",
-          link: "https://m.casper.hyundai.com/"
+          link: "https://m.casper.hyundai.com/",
+          ratio: "100% 참여"
         },
         {
           title: "3D 에뮬레이터 뷰어",
@@ -285,7 +312,8 @@ export default function Component() {
           description: "핸드폰 출시 시 실제 모델링하여 사용하는 3D 에뮬레이터 뷰어. 실물과 동일한 3D 모델을 웹에서 미리 확인할 수 있습니다.",
           image: "/img/img_phone_em.png",
           color: "bg-blue-50",
-          link: "https://www.samsung.com/global/galaxy/3d-360/viewer/?model_name=galaxy-z-flip5&highcontrast=0&gesture_guide=0&bgcolor=transparent&skin=colorlayer&theme=roundlayer&intro=1&ruler=1&breakpoint_criteria=outer&breakpoint_desktop_width=1024&intro_pose=2&intro_pose_once=1&intro_pose_hold=1#color=mint"
+          link: "https://www.samsung.com/global/galaxy/3d-360/viewer/?model_name=galaxy-z-flip5&highcontrast=0&gesture_guide=0&bgcolor=transparent&skin=colorlayer&theme=roundlayer&intro=1&ruler=1&breakpoint_criteria=outer&breakpoint_desktop_width=1024&intro_pose=2&intro_pose_once=1&intro_pose_hold=1#color=mint",
+          ratio: "100% 참여"
         },
       ]
     : [
@@ -296,6 +324,7 @@ export default function Component() {
           description: "Developing a metaverse game using 3D and WebXR technologies. Creating a next-generation web-based game.",
           image: "/img/img_meta.png",
           color: "bg-orange-50",
+          ratio: "100% involved"
         },
         {
           title: "Samsung.com UI/UX Improvement",
@@ -304,7 +333,8 @@ export default function Component() {
           description: "A project to improve the UI/UX of Samsung.com. Enhancing user experience and optimizing design for a better experience.",
           image: "/img/img_work_ss.png",
           color: "bg-purple-50",
-          link: "https://www.samsung.com/uk/"
+          link: "https://www.samsung.com/uk/",
+          ratio: "100% involved"
         },
         {
           title: "PRECISE Website",
@@ -313,15 +343,17 @@ export default function Component() {
           description: "AI-powered creative studio website. Designed and developed with AI assistance, showcasing the future of web development.",
           image: "/img/img_presice.png",
           color: "bg-green-50",
+          ratio: "100% involved"
         },
         {
-          title: "Hanwha Dreamplus Renewal",
-          category: "Web Development",
-          year: "2025",
-          description: "Full renewal of the Hanwha Dreamplus website. Providing a better experience through a complete homepage overhaul.",
+          title: "Dreamplus Asia Renewal",
+          category: "Web Publishing",
+          year: "2023",
+          description: "Renewal project for Dreamplus Asia. Focused on modern web publishing and improved workflow.",
           image: "/img/img_work_hh.png",
           color: "bg-purple-50",
-          link: "https://dreamplus.asia/about/"
+          link: "https://dreamplus.asia/about/",
+          ratio: "30% involved"
         },
         {
           title: "LOTTE Fine Chemical 60th Anniversary Museum",
@@ -330,7 +362,8 @@ export default function Component() {
           description: "A digital history/archive website celebrating 60 years of LOTTE Fine Chemical. Showcasing the brand's innovation, challenges, and sustainable future vision through immersive storytelling.",
           image: "/img/img_lotte.png",
           color: "bg-green-50",
-          link: "https://www.lottefinechem.com/lottefinechemhistory/"
+          link: "https://www.lottefinechem.com/lottefinechemhistory/",
+          ratio: "100% involved"
         },
         {
           title: "Hyundai Casper Mo Improvement",
@@ -339,7 +372,8 @@ export default function Component() {
           description: "Hyundai Casper Mo improvement project. Enhancing user experience and optimizing design for a better experience.",
           image: "/img/img_work_hy.png",
           color: "bg-blue-50",
-          link: "https://m.casper.hyundai.com/"
+          link: "https://m.casper.hyundai.com/",
+          ratio: "100% involved"
         },
         {
           title: "3D Emulator Viewer",
@@ -348,27 +382,10 @@ export default function Component() {
           description: "A 3D emulator viewer used for new phone launches. Experience the actual 3D model in the browser before the real product is released.",
           image: "/img/img_phone_em.png",
           color: "bg-blue-50",
-          link: "https://www.samsung.com/global/galaxy/3d-360/viewer/?model_name=galaxy-z-flip5&highcontrast=0&gesture_guide=0&bgcolor=transparent&skin=colorlayer&theme=roundlayer&intro=1&ruler=1&breakpoint_criteria=outer&breakpoint_desktop_width=1024&intro_pose=2&intro_pose_once=1&intro_pose_hold=1#color=mint"
+          link: "https://www.samsung.com/global/galaxy/3d-360/viewer/?model_name=galaxy-z-flip5&highcontrast=0&gesture_guide=0&bgcolor=transparent&skin=colorlayer&theme=roundlayer&intro=1&ruler=1&breakpoint_criteria=outer&breakpoint_desktop_width=1024&intro_pose=2&intro_pose_once=1&intro_pose_hold=1#color=mint",
+          ratio: "100% involved"
         },
       ]
-
-  const services = [
-    {
-      title: "Brand Identity",
-      description: "Creating memorable and impactful brand experiences",
-      image: "/img/img_service01.png",
-    },
-    {
-      title: "Interactive Motion",
-      description: "Engaging users with smooth, interactive animations and micro-interactions.",
-      image: "/img/img_service02.png",
-    },
-    {
-      title: "Strategy",
-      description: "Optimized for all devices and displays, ensuring a seamless experience everywhere.",
-      image: "/img/img_service03.png",
-    },
-  ]
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -427,27 +444,27 @@ export default function Component() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-gray-50/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-[0.4rem] flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 group relative select-none" style={{ minHeight: 32 }}>
-            <Image src="/img/logo.png" alt="PRECISE Logo" width={48} height={48} className="w-7 sm:w-8 md:w-12 h-auto object-contain transition-transform duration-300 group-hover:scale-105" priority />
+          <Link href="/Portfolio" className="flex items-center gap-2 group relative select-none" style={{ minHeight: 32 }}>
+            <Image src="/img/logo.png" alt="JUNG-SH Logo" width={48} height={48} className="w-7 sm:w-8 md:w-12 h-auto object-contain transition-transform duration-300 group-hover:scale-105" priority />
             <div className="flex flex-col leading-tight justify-center relative h-full">
-              {/* PRECISE 텍스트 outline */}
+              {/* JUNG-SH 텍스트 outline */}
               <span className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-300 select-none block relative">
-                PRECISE
+                JUNG-SH
               </span>
-              {/* PRECISE 텍스트 fill - 아래에서 위로 채워짐 */}
+              {/* JUNG-SH 텍스트 fill - 아래에서 위로 채워짐 */}
               <span
                 className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-black block absolute left-0 top-0 w-full h-full overflow-hidden select-none pointer-events-none"
                 style={{
                   clipPath: `inset(${100 - Math.min(scrollProgress * 2, 100)}% 0 0 0)`
                 }}
               >
-                PRECISE
+                JUNG-SH
               </span>
-              <span className="text-[7px] sm:text-[9px] md:text-xs font-medium text-gray-400 tracking-widest mt-[-2px]">AI AGENCY</span>
+              <span className="text-[7px] sm:text-[9px] md:text-xs font-medium text-gray-400 tracking-widest mt-[-2px]">Portfolio</span>
             </div>
           </Link>
           <div className="flex gap-[0.4rem] sm:gap-2 md:gap-4 items-center">
-            {content[language].nav.map((item, index) => {
+            {content[language as 'en'].nav.map((item: string, index: number) => {
               // 섹션 id 매핑
               let sectionId = '';
               if (item.toLowerCase().includes('work') || item === '작업물') sectionId = 'works';
@@ -522,7 +539,7 @@ export default function Component() {
             }`}
           >
             <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-bold tracking-tight mb-6 sm:mb-8 leading-[0.8] whitespace-nowrap overflow-hidden">
-              {"PRECISE".split("").map((letter, index) => (
+              {"JUNG-SH".split("").map((letter, index) => (
                 <span
                   key={index}
                   className={`inline-block transition-all duration-1000 ease-out ${
@@ -541,7 +558,7 @@ export default function Component() {
                 isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              {content[language].hero.description}
+              {content[language as 'en'].hero.description}
             </p>
             <div
               className={`transition-all duration-1000 delay-[1600ms] ${
@@ -554,21 +571,21 @@ export default function Component() {
                     size="lg"
                     className="bg-black text-white hover:bg-gray-800 rounded-full px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg group transition-all duration-300 hover:scale-105 hover:shadow-lg"
                   >
-                    {content[language].hero.button}
+                    {content[language as 'en'].hero.button}
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>{content[language].contact.dialog.title}</DialogTitle>
+                    <DialogTitle>{content[language as 'en'].contact.dialog.title}</DialogTitle>
                   </DialogHeader>
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <Input name="name" placeholder={content[language].contact.dialog.name} required />
-                    <Input name="email" type="email" placeholder={content[language].contact.dialog.email} required />
-                    <Input name="phone" type="tel" placeholder={content[language].contact.dialog.phone} required />
+                    <Input name="name" placeholder={content[language as 'en'].contact.dialog.name} required />
+                    <Input name="email" type="email" placeholder={content[language as 'en'].contact.dialog.email} required />
+                    <Input name="phone" type="tel" placeholder={content[language as 'en'].contact.dialog.phone} required />
                     <textarea 
                       name="message" 
-                      placeholder={content[language].contact.dialog.message} 
+                      placeholder={content[language as 'en'].contact.dialog.message} 
                       required 
                       className="w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" 
                     />
@@ -578,7 +595,7 @@ export default function Component() {
                         className="w-full" 
                         disabled={isSubmitting}
                       >
-                        {isSubmitting ? 'Sending...' : content[language].contact.dialog.submit}
+                        {isSubmitting ? 'Sending...' : content[language as 'en'].contact.dialog.submit}
                       </Button>
                       <DialogClose ref={dialogCloseRef} className="hidden" />
                     </DialogFooter>
@@ -634,15 +651,15 @@ export default function Component() {
               className={`text-3xl sm:text-4xl md:text-6xl font-light mb-4 sm:mb-6 ${language === 'ko' ? 'font-sans' : ''}`}
               style={language === 'ko' ? {fontFamily: 'Noto Sans KR, sans-serif', fontWeight: 500} : {}}
             >
-              {content[language].ai.title}
+              {content[language as 'en'].ai.title}
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
-              {content[language].ai.desc}
+              {content[language as 'en'].ai.desc}
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
-            {content[language].ai.features.map((feature, index) => (
+            {content[language as 'en'].ai.features.map((feature, index) => (
               <div
                 key={index}
                 className={`text-center group transition-all duration-600 hover:scale-105 px-4 ${
@@ -672,13 +689,13 @@ export default function Component() {
           >
             <div className="max-w-2xl mx-auto">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-medium mb-4">
-                {content[language].ai.ctaTitle}
+                {content[language as 'en'].ai.ctaTitle}
               </h3>
               <p className="text-gray-600 mb-6 sm:mb-8 text-base sm:text-lg">
-                {content[language].ai.ctaDesc}
+                {content[language as 'en'].ai.ctaDesc}
               </p>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
-                {content[language].ai.ctaTags.map((tag) => (
+                {content[language as 'en'].ai.ctaTags.map((tag) => (
                   <span key={tag} className="px-3 sm:px-4 py-2 bg-white rounded-full">{tag}</span>
                 ))}
               </div>
@@ -701,10 +718,10 @@ export default function Component() {
               className={`text-3xl sm:text-4xl md:text-6xl font-light mb-4 ${language === 'ko' ? 'font-sans' : ''}`}
               style={language === 'ko' ? {fontFamily: 'Noto Sans KR, sans-serif', fontWeight: 500} : {}}
             >
-              {content[language].works.title}
+              {content[language as 'en'].works.title}
             </h2>
             <p className="text-gray-600 text-base sm:text-lg">
-              {content[language].works.desc}
+              {content[language as 'en'].works.desc}
             </p>
           </div>
 
@@ -756,6 +773,11 @@ export default function Component() {
                           <span className="px-3 py-1 bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors duration-300">
                             {project.year}
                           </span>
+                          {project.ratio && (
+                            <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full font-semibold group-hover:bg-blue-200 transition-colors duration-300">
+                              {project.ratio}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -779,13 +801,13 @@ export default function Component() {
               id="about-content"
             >
               <h2
-                className={`text-3xl sm:text-4xl md:text-6xl font-light mb-6 sm:mb-8 ${language === 'ko' ? 'font-sans' : ''}`}
-                style={language === 'ko' ? {fontFamily: 'Noto Sans KR, sans-serif', fontWeight: 500} : {}}
+                className={`text-2xl sm:text-3xl md:text-5xl font-bold mb-6 sm:mb-8 ${language === 'ko' ? 'font-sans' : ''}`}
+                style={language === 'ko' ? {fontFamily: 'Noto Sans KR, sans-serif', fontWeight: 700} : {}}
               >
-                {content[language].about.title}
+                {content[language as 'en'].about.title}
               </h2>
               <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-600 leading-relaxed">
-                {content[language].about.desc.map((paragraph, index) => (
+                {content[language as 'en'].about.desc.map((paragraph, index) => (
                   <p key={index} className="transition-all duration-600 delay-200">
                     {paragraph}
                   </p>
@@ -794,7 +816,7 @@ export default function Component() {
 
               {/* Team Stats */}
               <div className="grid grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
-                {content[language].about.stats.map((stat, index) => (
+                {content[language as 'en'].about.stats.map((stat, index) => (
                   <div
                     key={index}
                     className={`transition-all duration-600 ${
@@ -831,70 +853,14 @@ export default function Component() {
                 <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-transparent pointer-events-none" />
                 <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 pointer-events-none">
                   <div className="text-xs sm:text-sm opacity-80 mb-2">
-                    {content[language].about.studio}
+                    {content[language as 'en'].about.studio}
                   </div>
                   <div className="text-lg sm:text-xl font-medium">
-                    {content[language].about.location}
+                    {content[language as 'en'].about.location}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <div
-            className={`text-center mb-12 sm:mb-16 transition-all duration-800 ${
-              visibleElements.has("services-header") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-            data-animate
-            id="services-header"
-          >
-            <h2
-              className={`text-3xl sm:text-4xl md:text-6xl font-light mb-4 ${language === 'ko' ? 'font-sans' : ''}`}
-              style={language === 'ko' ? {fontFamily: 'Noto Sans KR, sans-serif', fontWeight: 500} : {}}
-            >
-              {content[language].services.title}
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg">
-              {content[language].services.desc}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-            {services.map((service, index) => (
-              <Card
-                key={index}
-                className={`group border-0 shadow-none bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 ${
-                  visibleElements.has(`service-${index}`) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
-                data-animate
-                id={`service-${index}`}
-                style={{ transitionDelay: `${index * 200}ms` }}
-              >
-                <CardContent className="p-0">
-                  <div className="aspect-[4/3] bg-gray-100 rounded-t-2xl overflow-hidden relative">
-                    <Image
-                      src={service.image || "/placeholder.svg"}
-                      alt={service.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                  </div>
-                  <div className="p-4 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-medium mb-3 group-hover:translate-x-2 transition-transform duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm sm:text-base group-hover:translate-x-2 transition-transform duration-300 delay-100">
-                      {service.description}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
@@ -913,10 +879,10 @@ export default function Component() {
               className={`text-3xl sm:text-4xl md:text-6xl font-light mb-4 ${language === 'ko' ? 'font-sans' : ''}`}
               style={language === 'ko' ? {fontFamily: 'Noto Sans KR, sans-serif', fontWeight: 500} : {}}
             >
-              {content[language].contact.title}
+              {content[language as 'en'].contact.title}
             </h2>
             <p className="text-gray-300 text-base sm:text-lg">
-              {content[language].contact.desc}
+              {content[language as 'en'].contact.desc}
             </p>
           </div>
 
@@ -929,7 +895,7 @@ export default function Component() {
               id="contact-info"
             >
               <div className="space-y-6 sm:space-y-8">
-                {content[language].contact.info.map((contact, index) => (
+                {content[language as 'en'].contact.info.map((contact, index) => (
                   <div
                     key={index}
                     className={`flex items-center gap-4 transition-all duration-600 hover:translate-x-2 ${
@@ -998,20 +964,20 @@ export default function Component() {
                         size="lg"
                         className="bg-white text-black hover:bg-gray-100 rounded-full px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg transition-all duration-300 hover:scale-110 hover:shadow-lg"
                       >
-                        {content[language].contact.button}
+                        {content[language as 'en'].contact.button}
                       </Button>
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>{content[language].contact.dialog.title}</DialogTitle>
+                        <DialogTitle>{content[language as 'en'].contact.dialog.title}</DialogTitle>
                       </DialogHeader>
                       <form onSubmit={handleSubmit} className="space-y-4">
-                        <Input name="name" placeholder={content[language].contact.dialog.name} required />
-                        <Input name="email" type="email" placeholder={content[language].contact.dialog.email} required />
-                        <Input name="phone" type="tel" placeholder={content[language].contact.dialog.phone} required />
+                        <Input name="name" placeholder={content[language as 'en'].contact.dialog.name} required />
+                        <Input name="email" type="email" placeholder={content[language as 'en'].contact.dialog.email} required />
+                        <Input name="phone" type="tel" placeholder={content[language as 'en'].contact.dialog.phone} required />
                         <textarea 
                           name="message" 
-                          placeholder={content[language].contact.dialog.message} 
+                          placeholder={content[language as 'en'].contact.dialog.message} 
                           required 
                           className="w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" 
                         />
@@ -1021,7 +987,7 @@ export default function Component() {
                             className="w-full" 
                             disabled={isSubmitting}
                           >
-                            {isSubmitting ? 'Sending...' : content[language].contact.dialog.submit}
+                            {isSubmitting ? 'Sending...' : content[language as 'en'].contact.dialog.submit}
                           </Button>
                           <DialogClose ref={dialogCloseRef} className="hidden" />
                         </DialogFooter>
@@ -1049,10 +1015,10 @@ export default function Component() {
       <footer className="py-8 sm:py-12 px-4 sm:px-6 border-t border-gray-200 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-gray-600 text-sm sm:text-base">
-            {content[language].footer.copyright}
+            {content[language as 'en'].footer.copyright}
           </p>
           <div className="flex gap-4 sm:gap-6 hidden">
-            {content[language].footer.socials.map((social, index) => (
+            {content[language as 'en'].footer.socials.map((social, index) => (
               <Link
                 key={social}
                 href="#"
