@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 
-const CONTACT_TO = process.env.CONTACT_TO_EMAIL ?? "mm11zz@naver.com"
+const CONTACT_TO = process.env.CONTACT_TO_EMAIL ?? "tpdla2002@gmail.com"
+const CONTACT_FROM = "PRECISE <onboarding@resend.dev>"
 
 export async function POST(request: Request) {
   let data: Record<string, unknown>
@@ -33,7 +34,7 @@ export async function POST(request: Request) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "PRECISE <onboarding@resend.dev>",
+      from: CONTACT_FROM,
       to: [CONTACT_TO],
       reply_to: email,
       subject: `New Contact Form Submission from ${name}`,
