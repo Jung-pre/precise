@@ -1,1 +1,1 @@
-export const SITE_URL = "https://precise-jungsunghwas-projects.vercel.app"
+export const SITE_URL = "https://precise-phi.vercel.app"
